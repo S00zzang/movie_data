@@ -1,4 +1,5 @@
-from src.movie.api.call import gen_url, req, get_key, req2dataframe
+from src.movie.api.call import gen_url, req, get_key, req2list, list2df
+import pandas as pd
 
 def test_sk():
 	key = get_key()
@@ -20,10 +21,16 @@ def test_req():
 	assert code == 200
 
 
-def test_req2df():
-	l = req2dataframe()
+def test_req2list():
+	l = req2list()
 	assert len(l) > 0
 	v = l[0]
 	assert 'rnum' in v.keys()
 	assert v['rnum'] == '1'
 	
+def test_list2df():
+	df = list2df()
+	assert isinstance(df, pd.DataFrame)
+	assert 'rnum' in df.columns
+	assert 'movieNm' in  df.columns
+	assert 'audiAcc' in df.columns

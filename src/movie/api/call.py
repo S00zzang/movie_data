@@ -1,11 +1,23 @@
 import requests
 import os
+import pandas as pd
 
-def req2dataframe():
+def list2df():
+	l = req2list()
+	df = pd.DataFrame(l)
+
+	return df
+
+def req2list():
 	_, data = req()
 	# data.get('').get('')
 	l = data['boxOfficeResult']['dailyBoxOfficeList']
-
+	l = [
+		{'rnum' : '1', 'rank' : '1'},
+		{'rnum' : '2', 'rank' : '2'},
+		{'rnum' : '3', 'rank' : '3'},
+	]
+	
 	return l
 
 def gen_url(dt="20120101"):
