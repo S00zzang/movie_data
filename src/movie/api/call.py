@@ -2,8 +2,8 @@ import requests
 import os
 import pandas as pd
 
-def save2df(load_dt='20120101'):
-	df = list2df(load_dt)
+def save2df(load_dt = '20120101'):
+	df = list2df()
 	df['load_dt' ] = '20120101'
 	# df에 load_dt 컬럼 추가 (조회 일자 YYYYMMDD 형식)
 	df.to_parquet('~/tmp/test_parquet', partition_cols =['load_dt'])
