@@ -2,6 +2,14 @@ import requests
 import os
 import pandas as pd
 
+def save2df():
+	df = list2df()
+	df['load_dt' ] = '20120101'
+	# df에 load_dt 컬럼 추가 (조회 일자 YYYYMMDD 형식)
+	df.to_parquet('~/tmp/test_parquet', partition_cols =['load_dt'])
+
+	return df
+
 def list2df():
 	l = req2list()
 	df = pd.DataFrame(l)
@@ -10,13 +18,7 @@ def list2df():
 
 def req2list():
 	_, data = req()
-	# data.get('').get('')
 	l = data['boxOfficeResult']['dailyBoxOfficeList']
-	l = [
-		{'rnum' : '1', 'rank' : '1'},
-		{'rnum' : '2', 'rank' : '2'},
-		{'rnum' : '3', 'rank' : '3'},
-	]
 	
 	return l
 
