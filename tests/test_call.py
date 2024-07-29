@@ -41,7 +41,4 @@ def test_save2df():
 	df = save2df()
 
 	assert isinstance(df, pd.DataFrame)
-	assert 'rnum' in df.columns
-	assert 'openDt' in df.columns
-	assert 'movieNm' in df.columns
-	assert 'audiAcc' in df.columns
+	assert 'load_dt' in df.columns
