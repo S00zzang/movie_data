@@ -3,7 +3,7 @@ import os
 import pandas as pd
 
 def save2df(load_dt = '20120101'):
-	df = list2df()
+	df = list2df(load_dt)
 	df['load_dt' ] = '20120101'
 	# df에 load_dt 컬럼 추가 (조회 일자 YYYYMMDD 형식)
 	df.to_parquet('~/tmp/test_parquet', partition_cols =['load_dt'])
@@ -17,7 +17,7 @@ def list2df(load_dt='20120101'):
 	return df
 
 def req2list(load_dt='20120101') -> list:
-	_, data = req()
+	_, data = req(load_dt)
 	l = data['boxOfficeResult']['dailyBoxOfficeList']
 	
 	return l
@@ -30,8 +30,8 @@ def gen_url(dt="20120101"):
 	
 	return url
 
-def req(dt="20120101"):
-	url = gen_url(dt)
+def req(load_dt="20120101"):
+	url = gen_url(load_dt)
 	r = requests.get(url)
 
 	data = r.json()
