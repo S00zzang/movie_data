@@ -5,6 +5,16 @@ import pandas as pd
 def echo(yaho):
 	return yaho
 
+def apply_type2df(load_dt = '20120101', path="~/tmp/test_parquet"):
+	df = pd.read_parquet(f'{path}/load_dt={load_dt}')
+
+	num_cols = ['rnum', 'rank', 'rankInten', 'salesAmt', 'audiCnt', 'audiAcc', 'scrnCnt', 'showCnt', 'salesShare', 'salesInten', 'salesChange', 'audiInten', 'audiChange']
+	for col_names in num_cols:
+		df[col_names] = pd.to_numeric(df[col_names])
+
+	return df
+
+
 def save2df(load_dt = '20120101'):
 	df = list2df(load_dt)
 	df['load_dt' ] = load_dt

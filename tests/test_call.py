@@ -1,5 +1,11 @@
-from src.movie.api.call import gen_url, req, get_key, req2list, list2df, save2df, echo
+from src.movie.api.call import gen_url, req, get_key, req2list, list2df, save2df, echo, apply_type2df
 import pandas as pd
+
+def test_apply2df():
+	df = apply_type2df()
+	assert isinstance(df, pd.DataFrame)
+	assert df['rnum'].dtype in ['int64']
+	assert df['rank'].dtype in ['int64']
 
 def test_echo():
 	r = echo("hello")
