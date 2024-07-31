@@ -15,33 +15,33 @@ def apply_type2df(load_dt = '20120101', path="~/tmp/test_parquet"):
 	return df
 
 
-def save2df(load_dt = '20120101'):
-	df = list2df(load_dt)
+def save2df(load_dt = '20120101', url_param={}):
+	df = list2df(load_dt, url_param)
 	df['load_dt' ] = load_dt
 	# df에 load_dt 컬럼 추가 (조회 일자 YYYYMMDD 형식)
 	df.to_parquet('~/tmp/test_parquet', partition_cols =['load_dt'])
 
 	return df
 
-def list2df(load_dt='20120101'):
-	l = req2list(load_dt)
+def list2df(load_dt='20120101', url_param={}):
+	l = req2list(load_dt, url_param)
 	df = pd.DataFrame(l)
 
 	return df
 
-def req2list(load_dt='20120101') -> list:
-	_, data = req(load_dt)
+def req2list(load_dt='20120101', url_param={}) -> list:
+	_, data = req(load_dt, url_param)
 	l = data['boxOfficeResult']['dailyBoxOfficeList']
 	
 	return l
 
-def gen_url(dt="20120101", req_val={'multiMovieYn':'N'}):
+def gen_url(dt="20120101", url_param={'multiMovieYn':'N'}):
 	base_url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
 	key = get_key()
 	
 	url = f"{base_url}?key={key}&targetDt={dt}"
 	
-	for k, v in req_val.items():
+	for k, v in url_param.items():
 		url = url + f"&{k}={v}"
 
 	return url
