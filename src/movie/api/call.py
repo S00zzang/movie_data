@@ -35,12 +35,15 @@ def req2list(load_dt='20120101') -> list:
 	
 	return l
 
-def gen_url(dt="20120101"):
+def gen_url(dt="20120101", req_val={'multiMovieYn':'N'}):
 	base_url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
 	key = get_key()
-
+	
 	url = f"{base_url}?key={key}&targetDt={dt}"
 	
+	for k, v in req_val.items():
+		url = url + f"&{k}={v}"
+
 	return url
 
 def req(load_dt="20120101"):
