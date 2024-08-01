@@ -19,7 +19,7 @@ def save2df(load_dt = '20120101', url_param={}):
 	df = list2df(load_dt, url_param)
 	df['load_dt' ] = load_dt
 	# df에 load_dt 컬럼 추가 (조회 일자 YYYYMMDD 형식)
-	df.to_parquet('~/tmp/test_parquet', partition_cols =['load_dt'])
+	# df.to_parquet('~/tmp/test_parquet', partition_cols =['load_dt'])
 
 	return df
 
