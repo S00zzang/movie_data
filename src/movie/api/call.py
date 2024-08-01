@@ -3,7 +3,7 @@ import os
 import pandas as pd
 
 def echo(yaho):
-	return y/tmp/test_parquet/load_dt=20240725/multiMovieYn=Naho
+	return yaho
 
 def apply_type2df(load_dt = '20120101', path="~/tmp/test_parquet"):
 	df = pd.read_parquet(f'{path}/load_dt={load_dt}')
