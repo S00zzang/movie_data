@@ -5,7 +5,7 @@ import pandas as pd
 def echo(yaho):
 	return yaho
 
-def apply_type2df(load_dt = '20120101', path="~/tmp/test_parquet"):
+def apply_type2df(load_dt = '20240730', path="~/tmp/test_parquet"):
 	df = pd.read_parquet(f'{path}/load_dt={load_dt}')
 
 	num_cols = ['rnum', 'rank', 'rankInten', 'salesAmt', 'audiCnt', 'audiAcc', 'scrnCnt', 'showCnt', 'salesShare', 'salesInten', 'salesChange', 'audiInten', 'audiChange']
@@ -15,13 +15,13 @@ def apply_type2df(load_dt = '20120101', path="~/tmp/test_parquet"):
 	return df
 
 
-def save2df(load_dt = '20120101', url_param={}):
+def save2df(load_dt = '20240730', url_param={}):
 	df = list2df(load_dt, url_param)
 
 	df['load_dt'] = load_dt
 	# df에 load_dt 컬럼 추가 (조회 일자 YYYYMMDD 형식)
 
-	for k,v in url_params.items():
+	for k,v in url_param.items():
 		df[k] = v
 		cols.append(k)
 
@@ -29,19 +29,19 @@ def save2df(load_dt = '20120101', url_param={}):
 
 	return df
 
-def list2df(load_dt='20120101', url_param={}):
+def list2df(load_dt='20240730', url_param={}):
 	l = req2list(load_dt, url_param)
 	df = pd.DataFrame(l)
 
 	return df
 
-def req2list(load_dt='20120101', url_param={}) -> list:
+def req2list(load_dt='20240730', url_param={}) -> list:
 	_, data = req(load_dt, url_param)
 	l = data['boxOfficeResult']['dailyBoxOfficeList']
 	
 	return l
 
-def gen_url(dt="20120101", url_param={}):
+def gen_url(dt="20240730", url_param={}):
 	base_url = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
 	key = get_key()
 	
@@ -52,7 +52,7 @@ def gen_url(dt="20120101", url_param={}):
 
 	return url
 
-def req(load_dt="20120101", url_param={}):
+def req(load_dt="20240730", url_param={}):
 	url = gen_url(load_dt, url_param=url_param)
 	r = requests.get(url)
 

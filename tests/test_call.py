@@ -1,11 +1,6 @@
 from src.movie.api.call import gen_url, req, get_key, req2list, list2df, save2df, echo, apply_type2df
 import pandas as pd
 
-def test_apply2df():
-	df = apply_type2df()
-	assert isinstance(df, pd.DataFrame)
-	assert df['rnum'].dtype in ['int64']
-	assert df['rank'].dtype in ['int64']
 
 def test_echo():
 	r = echo("hello")
@@ -18,7 +13,7 @@ def test_sk():
 
 def test_gen_url():
 	url = gen_url()
-	assert url == "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=e1ac8e397edce73a571ba078b2d4db58&targetDt=20120101"
+	assert url == "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=e1ac8e397edce73a571ba078b2d4db58&targetDt=20240730"
 
 	assert True
 	assert "http" in url
@@ -52,3 +47,11 @@ def test_save2df():
 
 	assert isinstance(df, pd.DataFrame)
 	assert 'load_dt' in df.columns
+
+def test_apply2df():
+	df = apply_type2df()
+	assert isinstance(df, pd.DataFrame)
+	assert df['rnum'].dtype in ['int64']
+	assert df['rank'].dtype in ['int64']
+
+
