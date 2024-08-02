@@ -23,7 +23,7 @@ def save2df(load_dt = '20240730', url_param={}):
 
 	for k,v in url_param.items():
 		df[k] = v
-		cols.append(k)
+		#cols.append(k)
 
 	df.to_parquet('~/tmp/test_parquet', partition_cols=['load_dt'])
 
